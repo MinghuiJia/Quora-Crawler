@@ -1,0 +1,13 @@
+alreadyProcess是已经处理过的不同关键词的url
+questionType文件夹是根据question类型查的帖子url
+answerType文件夹是根据answer类型查的帖子url
+unionQuestionAnswerType文件夹是合并相同关键词帖子url后的存放url的文件夹
+noProcess文件夹是需要处理的不同关键词的帖子url
+
+main.py - 任务执行的主程序文件，运行即可开始根据关键词：收集问题->解析问题回答
+getQuestionURL.py - 用于收集关键词对应的问题urls程序
+getAnswers.py - 用于解析爬取对应问题urls下的回答
+urlUnion.py - 用于合并对应关键词question和answer类型的urls
+withoutProcessUrlsStatistic.py - 用于剔除合并后每个关键词对应的已经处理过的urls
+
+该项目是分步的思想，即先根据关键词收集到所有相关的问题，然后再逐个解析对应问题的回答
