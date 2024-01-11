@@ -4,6 +4,7 @@ import time
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 # import pymysql
 
@@ -140,7 +141,10 @@ def extractPageInfo(browser, url, keyword, func):
     # 记录解析到第几个回答
     processCount = 1
     # 打开profile页面，用于后续解析个人信息
-    browserProfile = webdriver.Chrome()
+    chrome_options = Options()
+    chrome_options.add_argument('--no-sandbox') #禁用sandbox，让Chrome在root权限下跑
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    browserProfile = webdriver.Chrome(chrome_options=chrome_options)
 
     for answered in answereds:
         try:
@@ -270,7 +274,10 @@ def getAnsweredInfo(answered_file_path):
     # chromedirver模拟操作浏览器
     chromedriver = "chromedriver"
     os.environ["webdriver.chrome.driver"] = chromedriver
-    browser = webdriver.Chrome()
+    chrome_options = Options()
+    chrome_options.add_argument('--no-sandbox')  # 禁用sandbox，让Chrome在root权限下跑
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    browser = webdriver.Chrome(chrome_options=chrome_options)
 
     # 记录问题的txt文本存在则直接读取内容，不存在则会创建
     answered_file = open(answered_file_path, 'a+')
