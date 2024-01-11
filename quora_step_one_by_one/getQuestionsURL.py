@@ -139,8 +139,8 @@ def getQuestionsUrlsByKeywords(keywords):
     chromedriver = "chromedriver"
     os.environ["webdriver.chrome.driver"] = chromedriver
     chrome_options = Options()
-    chrome_options.add_argument('--no-sandbox')  # 禁用sandbox，让Chrome在root权限下跑
-    chrome_options.add_argument('--disable-dev-shm-usage')
+    # chrome_options.add_argument('--no-sandbox')  # 禁用sandbox，让Chrome在root权限下跑
+    # chrome_options.add_argument('--disable-dev-shm-usage')
     browser = webdriver.Chrome(chrome_options=chrome_options)
 
     # 用于记录问题的文本
