@@ -293,7 +293,7 @@ def getAnsweredInfo(answered_file_path):
     for url in already_exist_urls:
         temp = url.split("/")[2]
         print(url, " question start crawler...")
-        if (temp == 'www.quora_step_consistent.com'):
+        if (temp == 'www.quora.com'):
             # 正常的问答帖子
             getNormalAnsweredInfo(browser, url, keyword)
         else:
