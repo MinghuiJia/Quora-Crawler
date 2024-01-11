@@ -73,7 +73,8 @@ def getProfileInfo(href, browser):
         infoList.append([baseInfos[0].text, ""])   # name
         infoList.append([baseInfos[1].text, ""])   # describle
         infoList.append([baseInfos[-2].text, ""])  # followers
-    except:
+    except (Exception, BaseException) as e:
+        print(e)
         raise Exception('open profile page error...')
     finally:
         time.sleep(3)
@@ -134,7 +135,8 @@ def extractPageInfo(browser, url, keyword, func):
         # 获取有回答的帖子的所有元素
         # answereds = raw_main_content.find_all('div', attrs={'class': re.compile("dom_annotate_question_answer_item_\d+")})
         answereds = raw_main_content.select('#mainContent div[class*="dom_annotate_question_answer_item"]')
-    except:
+    except (Exception, BaseException) as e:
+        print(e)
         # 加入随机操作噪声
         # mouseMoveRandom(browser)
 
@@ -256,7 +258,8 @@ def extractPageInfo(browser, url, keyword, func):
             #         '''
             # insertData2Mysql(sql, param)
 
-        except:
+        except (Exception, BaseException) as e:
+            print(e)
             continue
         finally:
             print("processing answer ", processCount, ' finished...')
@@ -304,7 +307,8 @@ def getOtherFormatAnsweredInfo(browser, url, keyword):
     try:
         # 所有文本展开后，解析所有的回答card
         extractPageInfo(browser, url, keyword, getOtherFormatAnsweredInfo)
-    except:
+    except (Exception, BaseException) as e:
+        print(e)
         pass
     finally:
         time.sleep(2)

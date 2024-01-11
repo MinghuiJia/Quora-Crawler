@@ -118,7 +118,8 @@ def extractPageInfo(browser, url, keyword, func):
         # 获取有回答的帖子的所有元素
         # answereds = raw_main_content.find_all('div', attrs={'class': re.compile("dom_annotate_question_answer_item_\d+")})
         answereds = raw_main_content.select('#mainContent div[class*="dom_annotate_question_answer_item"]')
-    except:
+    except (Exception, BaseException) as e:
+        print(e)
         time.sleep(300)
 
         # 如果出现任何意外就重新开始解析这个问题的帖子
@@ -229,8 +230,8 @@ def extractPageInfo(browser, url, keyword, func):
             #         '''
             # insertData2Mysql(sql, param)
 
-        except:
-            continue
+        except (Exception, BaseException) as e:
+            print(e)
         finally:
             print("processing answer ", processCount, ' finished...')
             processCount += 1
