@@ -47,7 +47,10 @@ def getCurrentPageQuestions(browser, already_exist_urls, answered_urls, answered
                 # mouseMoveRandom(browser)
 
                 # 开一个新的chrome，用于处理每个问题url内的回答
-                browserAnswerPage = webdriver.Chrome()
+                # 设置chrome不加载图片，提升速度，同时降低浏览器占用内存（回答过多导致浏览器内存不足）
+                chrome_options = Options()
+                chrome_options.add_experimental_option("prefs", {"profile.managed_default_content_settings.images": 2})
+                browserAnswerPage = webdriver.Chrome(chrome_options=chrome_options)
 
                 try:
                     # 处理并解析每个问题url内的回答

@@ -278,6 +278,8 @@ def getAnsweredInfo(answered_file_path):
     chrome_options = Options()
     # chrome_options.add_argument('--no-sandbox')  # 禁用sandbox，让Chrome在root权限下跑
     # chrome_options.add_argument('--disable-dev-shm-usage')
+    # 解析回答时不让图片加载，减少浏览器内存占用（回答过多可能导致浏览器内存不足）
+    chrome_options.add_experimental_option("prefs", {"profile.managed_default_content_settings.images": 2})
     browser = webdriver.Chrome(chrome_options=chrome_options)
 
     # 记录问题的txt文本存在则直接读取内容，不存在则会创建
