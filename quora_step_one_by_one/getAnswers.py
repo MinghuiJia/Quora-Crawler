@@ -118,6 +118,10 @@ def extractPageInfo(browser, url, keyword, func):
         # 获取有回答的帖子的所有元素
         # answereds = raw_main_content.find_all('div', attrs={'class': re.compile("dom_annotate_question_answer_item_\d+")})
         answereds = raw_main_content.select('#mainContent div[class*="dom_annotate_question_answer_item"]')
+
+        questionName = questionNameEle.text
+        print("collected ", len(answereds), " answer list-item")
+        print("question name: ", questionName)
     except (Exception, BaseException) as e:
         print(e)
         time.sleep(300)
@@ -126,10 +130,6 @@ def extractPageInfo(browser, url, keyword, func):
         func(browser, url, keyword)
 
         return
-
-    questionName = questionNameEle.text
-    print("collected ", len(answereds), " answer list-item")
-    print("question name: ", questionName)
 
     # 解析每个回答的信息列表
     upvoteCounts = []
@@ -148,6 +148,9 @@ def extractPageInfo(browser, url, keyword, func):
     browserProfile = webdriver.Chrome(chrome_options=chrome_options)
 
     for answered in answereds:
+        # 一个帖子超过1000个回答，就只收集1000条回答
+        if (processCount >= 1000):
+            break
         try:
             print("processing answer ", processCount, ' start...')
 
