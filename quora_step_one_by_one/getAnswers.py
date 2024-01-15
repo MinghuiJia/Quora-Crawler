@@ -251,28 +251,34 @@ def extractPageInfo(browser, url, keyword, func):
 def getNormalAnsweredInfo(browser, url, keyword):
     browser.get(url)
 
-    # 先切换从All related到Answers menu
-    # 点击All related 按钮
-    relatedEle = getAllRelatedOrAnswersButton('All related', browser)
-    time.sleep(5)
-    # 可能会存在问题的帖子里面没有这个按钮
-    if (relatedEle): browser.execute_script("arguments[0].click();", relatedEle)
+    try:
+        # 先切换从All related到Answers menu
+        # 点击All related 按钮
+        relatedEle = getAllRelatedOrAnswersButton('All related', browser)
+        time.sleep(5)
+        # 可能会存在问题的帖子里面没有这个按钮
+        if (relatedEle): browser.execute_script("arguments[0].click();", relatedEle)
 
-    # 点击Answers按钮
-    answersEle = getAllRelatedOrAnswersButton('Answer', browser)
-    time.sleep(5)
-    # 可能会存在问题的帖子里面没有这个按钮
-    if (answersEle): browser.execute_script("arguments[0].click();", answersEle)
+        # 点击Answers按钮
+        answersEle = getAllRelatedOrAnswersButton('Answer', browser)
+        time.sleep(5)
+        # 可能会存在问题的帖子里面没有这个按钮
+        if (answersEle): browser.execute_script("arguments[0].click();", answersEle)
 
-    # 所有文本展开后，解析所有的回答card
-    extractPageInfo(browser, url, keyword, getNormalAnsweredInfo)
+        # 所有文本展开后，解析所有的回答card
+        extractPageInfo(browser, url, keyword, getNormalAnsweredInfo)
+    except Exception as e:
+        print(e)
 
 # 与normal对比，没有comment的button，也不需要先进行选择answers
 def getOtherFormatAnsweredInfo(browser, url, keyword):
     browser.get(url)
 
-    # 所有文本展开后，解析所有的回答card
-    extractPageInfo(browser, url, keyword, getOtherFormatAnsweredInfo)
+    try:
+        # 所有文本展开后，解析所有的回答card
+        extractPageInfo(browser, url, keyword, getOtherFormatAnsweredInfo)
+    except Exception as e:
+        print(e)
 
 def getAnsweredInfo(answered_file_path):
     # chromedirver模拟操作浏览器

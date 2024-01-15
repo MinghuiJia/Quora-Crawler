@@ -296,8 +296,8 @@ def getNormalAnsweredInfo(browser, url, keyword):
 
         # 所有文本展开后，解析所有的回答card
         extractPageInfo(browser, url, keyword, getNormalAnsweredInfo)
-    except:
-        pass
+    except Exception as e:
+        print(e)
     finally:
         time.sleep(2)
         # 清除一下浏览器缓存
@@ -312,7 +312,6 @@ def getOtherFormatAnsweredInfo(browser, url, keyword):
         extractPageInfo(browser, url, keyword, getOtherFormatAnsweredInfo)
     except (Exception, BaseException) as e:
         print(e)
-        pass
     finally:
         time.sleep(2)
         # # 清除一下浏览器缓存
